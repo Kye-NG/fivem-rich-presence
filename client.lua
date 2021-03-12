@@ -8,22 +8,32 @@ Citizen.CreateThread(function()
   -- Here you will have to put the image name for the "large" icon.
   SetDiscordRichPresenceAsset('server-icon')
 
-    -- Here you can add hover text for the "large" icon.
-    SetDiscordRichPresenceAssetText('Testing my server')
-   
-    -- Here you will have to put the image name for the "small" icon.
-    SetDiscordRichPresenceAssetSmall('server-icon')
+  -- Get number of players
+  local players = {}
+  for i = 0, 255 do
+    if NetworkIsPlayerActive(i) then
+      table.insert(players, i)
+    end
+  end
 
-    -- Here you can add hover text for the "small" icon.
-    SetDiscordRichPresenceAssetSmallText('Still testing')
+  SetRichPresence(GetPlayerName(PlayerId()) .. " - ".. #players .. "/32")
 
-    --[[ 
-      Here you can add buttons that will display in your Discord Status,
-      First paramater is the button index (0 or 1), second is the title and 
-      last is the url (this has to start with "fivem://connect/" or "https://") 
-    ]]--
-    -- SetDiscordRichPresenceAction(0, "First Button!", "fivem://connect/localhost:30120")
-    -- SetDiscordRichPresenceAction(1, "Second Button!", "fivem://connect/localhost:30120")
+  -- Here you can add hover text for the "large" icon.
+  SetDiscordRichPresenceAssetText('Testing my server')
+
+  -- Here you will have to put the image name for the "small" icon.
+  -- SetDiscordRichPresenceAssetSmall('server-icon')
+
+  -- Here you can add hover text for the "small" icon.
+  -- SetDiscordRichPresenceAssetSmallText('Still testing')
+
+  --[[ 
+    Here you can add buttons that will display in your Discord Status,
+    First paramater is the button index (0 or 1), second is the title and 
+    last is the url (this has to start with "fivem://connect/" or "https://") 
+  ]]--
+  -- SetDiscordRichPresenceAction(0, "First Button!", "fivem://connect/localhost:30120")
+  -- SetDiscordRichPresenceAction(1, "Second Button!", "fivem://connect/localhost:30120")
 
   -- It updates every minute just in case.
   Citizen.Wait(60000)
